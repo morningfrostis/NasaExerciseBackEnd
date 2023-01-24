@@ -42,7 +42,12 @@ const toggleNasaToFavorite = async ({ id, idNasa }) => {
     if (existed) {
         newFavsList = currentFavList.filter(item => item !== idNasa)
     } else {
-        newFavsList.push(idNasa)
+        const fav = await User.findById(idNasa)
+        if (fav) {
+            newFavsList.push(idNasa)
+        } else {
+            throw new Error('No exists')
+        }
     }
 
     await User.findByIdAndUpdate(id, { nasaFavs: newFavsList })
