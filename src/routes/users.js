@@ -14,7 +14,12 @@ routerUser.get('/:id',  async (request, response) => {
     try {
         const { id } = request.params
         const user = await getUserById(id)
-        response.status(200).json(user)
+        const userDataToShow = {
+            _id: user._id,
+            email: user.email,
+            nasaFavs: user.nasaFavs,
+        }
+        response.status(200).json(userDataToShow)
     } catch (error) {
         response.status(500)
     }
