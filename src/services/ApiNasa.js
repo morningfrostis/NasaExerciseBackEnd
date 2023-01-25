@@ -38,7 +38,8 @@ async function getApi() {
         }
         if (itemsToCreate.length > 0) {
             await Data.insertMany(itemsToCreate);
-            console.log('DATOS GUARDADOS EN LA BASE DE DATOS');
+            await Data.find();
+            return 'DATOS SINCRONIZADOS Y GUARDADOS EN LA BASE DE DATOS';
         }
 
         return existedItems.concat(itemsToCreate);

@@ -1,14 +1,14 @@
 const routerUser = require('express').Router()
 const { getUserById, getUsersList, createUser, removeUser, updateUser, toggleNasaToFavorite } = require('../controllers/controlerUser')
 
-routerUser.get('/', async (request, response) => {
-    try {
-        const users = await getUsersList()
-        response.status(200).json(users)
-    } catch (error) {
-        response.status(500)
-    }
-})
+// routerUser.get('/', async (request, response) => {
+//     try {
+//         const users = await getUsersList()
+//         response.status(200).json(users)
+//     } catch (error) {
+//         response.status(500)
+//     }
+// })
 
 routerUser.get('/:id',  async (request, response) => {
     try {

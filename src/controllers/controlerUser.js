@@ -7,6 +7,7 @@ const getUsersList = async () => {
 
 const getUserById = async (id) => {
     const user = await User.findById(id)
+    delete user.password;
     return user
 }
 
