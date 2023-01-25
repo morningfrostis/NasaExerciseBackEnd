@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
 const connectToDb = async () => {
-    await mongoose.connect('mongodb://localhost:27017/nasa_db');
+    await mongoose.connect(process.env.MONGO);
     console.log('DB CONNECTED!')
 }
 

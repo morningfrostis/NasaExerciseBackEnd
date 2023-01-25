@@ -1,12 +1,3 @@
-//Importo "mongoose" ya que voy a hacer la llamada a la API
-const mongoose = require('mongoose');
-
-//Suppress warning
-mongoose.set('strictQuery', true);
-
-//Me conecto a la base de datos de MongoDB utilizando Mongoose
-mongoose.connect('mongodb://localhost:27017/nasa_db', { useNewUrlParser: true });
-
 const Data = require('../models/schemaNasa')
 
 //Declaramos la función que llama a la api de la nasa y que usaremos en el GET general
