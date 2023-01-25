@@ -14,7 +14,7 @@ async function getApi() {
     try {
         console.log('EJECUTANDO GET API')
 
-        const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key='+ process.env.APIKEY)
+        const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=' + process.env.APIKEY)
         const roversList = await response.json()
 
         const roverPhoto = roversList.photos

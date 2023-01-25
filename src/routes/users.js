@@ -10,7 +10,7 @@ const { getUserById, getUsersList, createUser, removeUser, updateUser, toggleNas
 //     }
 // })
 
-routerUser.get('/:id',  async (request, response) => {
+routerUser.get('/:id', async (request, response) => {
     try {
         const { id } = request.params
         const user = await getUserById(id)
@@ -37,7 +37,7 @@ routerUser.post('/', async (request, response) => {
 
 routerUser.post('/toggle/datas/:idNasa', async (request, response) => {
     try {
-        const {idNasa} = request.params
+        const { idNasa } = request.params
         const user = await toggleNasaToFavorite({
             id: request.user.id,
             idNasa
@@ -51,7 +51,7 @@ routerUser.post('/toggle/datas/:idNasa', async (request, response) => {
 // Obtener favoritos por cada usuario
 routerUser.get('/favorites/:idNasa', async (request, response) => {
     try {
-        const {idNasa} = request.params
+        const { idNasa } = request.params
         const user = await getUserById(idNasa)
         const favorites_ = user.nasaFavs
         response.status(200).json(favorites_)
