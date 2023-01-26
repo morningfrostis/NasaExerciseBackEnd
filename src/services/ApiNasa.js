@@ -1,12 +1,3 @@
-//Importo "mongoose" ya que voy a hacer la llamada a la API
-const mongoose = require('mongoose');
-
-//Suppress warning
-mongoose.set('strictQuery', true);
-
-//Me conecto a la base de datos de MongoDB utilizando Mongoose
-mongoose.connect('mongodb://localhost:27017/nasa_db', { useNewUrlParser: true });
-
 const Data = require('../models/schemaNasa')
 
 //Declaramos la función que llama a la api de la nasa y que usaremos en el GET general
@@ -30,6 +21,7 @@ async function getApi() {
         //Probamos aquí el código para controlar documentos duplicados
         const itemsToCreate = [];
         const existedItems = await Data.find();
+
         for (const item of newList) {
             const existed = existedItems.find((existedItem) => existedItem.idNasa === item.idNasa)
             if (!existed) {
@@ -38,11 +30,12 @@ async function getApi() {
         }
         if (itemsToCreate.length > 0) {
             Data.insertMany(itemsToCreate);
-            Data.find();
+            //Data.find();
             return 'DATOS SINCRONIZADOS Y GUARDADOS EN LA BASE DE DATOS';
         }
 
-        return existedItems.concat(itemsToCreate);
+        //return existedItems.concat(itemsToCreate);
+        return 'NO HAY DATOS NUEVOS PARA GUARDAR EN LA BASE DE DATOS';
 
     } catch (error) {
         console.log(error);

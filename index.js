@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const routerUser = require('./src/routes/users');
 const routerNasa = require('./src/routes/syncApiNasa');
 const routerAuth = require('./src/routes/auth');
-const {controlAuthentication} = require('./src/middelware/auth')
+const { controlAuthentication } = require('./src/middelware/auth')
 const connectToDb = require('./src/services/db');
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-const startApp = async () => {
+const startApp = () => {
     const app = express();
     const port = process.env.PORT
 
@@ -24,7 +24,7 @@ const startApp = async () => {
     app.use('/auth', routerAuth)
 
     try {
-        await connectToDb()
+        connectToDb()
         app.listen(port, () => {
             console.log('NASA APP running on port ' + port)
         })

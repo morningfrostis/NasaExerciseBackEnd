@@ -1,4 +1,5 @@
 const User = require('../models/schemaUser')
+const Data = require('../models/schemaNasa')
 
 const getUsersList = async () => {
     const users = await User.find()
@@ -43,22 +44,14 @@ const toggleNasaToFavorite = async ({ id, idNasa }) => {
     if (existed) {
         newFavsList = currentFavList.filter(item => item !== idNasa)
     } else {
-        const fav = await User.findById(idNasa)
-        if (fav) {
-            newFavsList.push(idNasa)
-        }
-        else {
+        const fav = await Data.findById(id)
+        if (!fav) {
             throw new Error('No exist this data in DB')
         }
+        else {
+            newFavsList.push(idNasa)
+        }
     }
-    //else {
-    //const fav = await User.findById(idNasa)
-    // if (fav) {
-    //     newFavsList.push(idNasa)
-    // } else {
-    //     throw new Error('No exists data')
-    // }
-    //}
 
     await User.findByIdAndUpdate(id, { nasaFavs: newFavsList })
 
