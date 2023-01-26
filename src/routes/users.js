@@ -5,16 +5,20 @@ const { getUserById, toggleNasaToFavorite } = require('../controllers/controlerU
 routerUser.post('/addToFavorites/:idNasa', async (request, response) => {
     try {
         const { idNasa } = request.params
-        const user = await toggleNasaToFavorite({
+        const { user, isAdded } = await toggleNasaToFavorite({
             id: request.user.id,
             idNasa
         })
-        response.status(200).json(user)
+        if (isAdded) {
+            response.status(200).json('Favorites successfully added')
+        } else {
+            response.status(200).json('Favorite delete Ok')
+        }
     } catch (error) {
         if (error.message === 'No exist this data in DB') {
             response.status(400).json(error.message)
         } else {
-            response.status(500).json('Favorite creation failed')
+            response.status(500).json('No exist this data in DB')
         }
     }
 })

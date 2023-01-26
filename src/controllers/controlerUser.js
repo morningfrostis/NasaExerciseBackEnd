@@ -40,16 +40,17 @@ const toggleNasaToFavorite = async ({ id, idNasa }) => {
     let newFavsList = currentFavList
 
     const existed = currentFavList.includes(idNasa)
-
+    let isAdded = false;
     if (existed) {
         newFavsList = currentFavList.filter(item => item !== idNasa)
     } else {
-        const fav = await Data.findById(id)
+        const fav = await Data.findById(idNasa)
         if (!fav) {
             throw new Error('No exist this data in DB')
         }
         else {
             newFavsList.push(idNasa)
+            isAdded = true
         }
     }
 
@@ -59,8 +60,7 @@ const toggleNasaToFavorite = async ({ id, idNasa }) => {
     userUpdated = JSON.parse(JSON.stringify(userUpdated))
 
     const { password, salt, ...userUpdated_ } = userUpdated;
-    return userUpdated_;
-
+    return { user: userUpdated_, isAdded: isAdded }
 }
 
 module.exports = {

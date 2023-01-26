@@ -5,9 +5,9 @@ const getNasaList = async () => {
     return result
 }
 
-const getNasaById = async (id) => {
+const getNasaById = async (idNasa) => {
     //const result = await Data.find(request.body);
-    const result = await Data.findById(id);
+    const result = await Data.findOne(idNasa);
     return result
 }
 
@@ -17,9 +17,11 @@ const createNasa = async ({ idNasa, camera, img_src, earth_date }) => {
 }
 
 const updateNasa = async (id, data) => {
-    const result = await getNasaById(id);
-    await result.updateOne(data)
-    return getNasaById(id)
+    const result = await Data.findByIdAndUpdate(id, data, { new: true });
+    if (!result) {
+        throw new Error("No se encuentra el documento a actualizar")
+    }
+    return result
 }
 
 const removeNasa = async (id) => {
